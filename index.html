@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <script>
+      (function () {
+        var isExt = function (src, stack) {
+          var s = (src || "") + " " + (stack || "");
+          return (
+            s.indexOf("chrome-extension://") !== -1 ||
+            s.indexOf("moz-extension://") !== -1 ||
+            s.indexOf("safari-extension://") !== -1
+          );
+        };
+        window.addEventListener(
+          "error",
+          function (e) {
+            if (isExt(e && e.filename, e && e.error && e.error.stack)) {
+              e.preventDefault();
+              e.stopImmediatePropagation();
+            }
+          },
+          true
+        );
+        window.addEventListener(
+          "unhandledrejection",
+          function (e) {
+            var r = e && e.reason;
+            if (r && isExt("", r.stack || String(r))) {
+              e.preventDefault();
+              e.stopImmediatePropagation();
+            }
+          },
+          true
+        );
+      })();
+    </script>
+    <title>XEROTV — Early Access Third-Party Streaming &amp; Catalog Sync</title>
+    <meta
+      name="description"
+      content="XEROTV Early Access — Third-party streaming discovery and catalog sync interface powered by TMDB metadata and multi-server playback."
+    />
+    <meta property="og:title" content="XEROTV — Early Access Third-Party Streaming" />
+    <meta
+      property="og:description"
+      content="Discover movies, series, and anime with live TMDB metadata, cross-device catalog sync, and multi-server streaming playback."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#090a0f" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="XEROTV" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-[#090a0f] text-slate-100 antialiased selection:bg-rose-600/30 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

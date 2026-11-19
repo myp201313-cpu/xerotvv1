@@ -1,0 +1,6 @@
+{
+  "name": "XEROTV",
+  "description": "XEROTV Early Access — Third-party streaming discovery and catalog sync interface powered by TMDB metadata and multi-server playback.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
